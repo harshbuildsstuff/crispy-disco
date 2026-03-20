@@ -524,3 +524,4 @@ window.addEventListener('load', () => {
     client.requestAccessToken();
   }
 });
+if (!accessToken) { showToast('Connect first', 'error'); return; }
