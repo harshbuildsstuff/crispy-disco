@@ -64,9 +64,8 @@
     </div>
 
     <div class="dropzone-wrapper">
-      <div id="dropzone" class="disabled"
-           ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)"
-           onclick="triggerFilePicker()">
+      <label id="dropzone" class="disabled" for="fileInput"
+           ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
         <div class="warp-ring"></div>
         <div class="warp-ring"></div>
         <div class="warp-ring"></div>
@@ -79,7 +78,7 @@
           Drop files to beam them to your Drive<br/>
           <span class="drop-browse">or tap to select from device</span>
         </div>
-      </div>
+      </label>
     </div>
 
     <div class="stats-row">
