@@ -532,4 +532,3 @@ window.addEventListener('load', () => {
     client.requestAccessToken();
   }
 });
-
