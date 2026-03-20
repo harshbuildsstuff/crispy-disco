@@ -243,8 +243,16 @@ function onDrop(e) {
   handleFiles([...e.dataTransfer.files]);
 }
 
+function triggerFilePicker() {
+  if (!accessToken) {
+    showToast('Connect first', 'error');
+    return;
+  }
+  document.getElementById('fileInput').click();
+}
+
 function onFileSelect(e) {
-  handleFiles([...e.target.files]);
+  const files = [...e.target.files];
   e.target.value = '';
   handleFiles(files);
 }
@@ -524,4 +532,4 @@ window.addEventListener('load', () => {
     client.requestAccessToken();
   }
 });
-if (!accessToken) { showToast('Connect first', 'error'); return; }
+
