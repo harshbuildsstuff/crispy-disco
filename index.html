@@ -26,108 +26,78 @@
     <button id="authBtn" onclick="handleAuth()">Connect</button>
   </header>
 
-  <div class="tab-bar">
-    <button class="tab-btn active" onclick="switchTab('dashboard')">Dashboard</button>
-    <button class="tab-btn" onclick="switchTab('achievements')">
-      Achievements
-      <span class="tab-badge hidden" id="achievementBadge">0</span>
-    </button>
+  <div class="info-grid">
+    <div class="info-card panel">
+      <div class="info-label">Storage Used</div>
+      <div class="info-value accent" id="infoUsed">—</div>
+    </div>
+    <div class="info-card panel">
+      <div class="info-label">Free Space</div>
+      <div class="info-value green" id="infoFree">—</div>
+    </div>
+    <div class="info-card wide panel">
+      <div class="info-label">Capacity</div>
+      <div class="storage-bar-wrap"><div class="storage-bar-fill" id="storageBar" style="width:0%"></div></div>
+      <div class="storage-text" id="storageText">Awaiting connection…</div>
+    </div>
   </div>
 
-  <div id="tabDashboard" class="tab-content">
-
-    <div class="info-grid">
-      <div class="info-card panel">
-        <div class="info-label">Storage Used</div>
-        <div class="info-value accent" id="infoUsed">—</div>
-      </div>
-      <div class="info-card panel">
-        <div class="info-label">Free Space</div>
-        <div class="info-value green" id="infoFree">—</div>
-      </div>
-      <div class="info-card wide panel">
-        <div class="info-label">Capacity</div>
-        <div class="storage-bar-wrap"><div class="storage-bar-fill" id="storageBar" style="width:0%"></div></div>
-        <div class="storage-text" id="storageText">Awaiting connection…</div>
+  <div class="folder-bar panel">
+    <div class="folder-left">
+      <div class="folder-emoji">📡</div>
+      <div class="folder-info">
+        <div class="folder-label">Transmission Target</div>
+        <div class="folder-name" id="folderName">Connect to assign folder</div>
       </div>
     </div>
-
-    <div class="folder-bar panel">
-      <div class="folder-left">
-        <div class="folder-emoji">📡</div>
-        <div class="folder-info">
-          <div class="folder-label">Transmission Target</div>
-          <div class="folder-name" id="folderName">Connect to assign folder</div>
-        </div>
-      </div>
-      <button class="folder-change-btn" onclick="openFolderModal()">Reroute</button>
-    </div>
-
-    <div class="dropzone-wrapper">
-      <label id="dropzone" class="disabled" for="fileInput"
-           ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
-        <div class="warp-ring"></div>
-        <div class="warp-ring"></div>
-        <div class="warp-ring"></div>
-        <div class="drop-corner-tr"></div>
-        <div class="drop-corner-bl"></div>
-        <div class="drop-inner-glow"></div>
-        <div class="drop-icon">🌌</div>
-        <div class="drop-title">Initiate Transmission</div>
-        <div class="drop-sub">
-          Drop files to beam them to your Drive<br/>
-          <span class="drop-browse">or tap to select from device</span>
-        </div>
-      </label>
-    </div>
-
-    <div class="stats-row">
-      <div class="stat-card panel">
-        <div class="stat-label">Queued</div>
-        <div class="stat-dot-row">
-          <div class="stat-dot red"></div>
-          <span class="stat-value" id="statQueued">0</span>
-        </div>
-      </div>
-      <div class="stat-card panel">
-        <div class="stat-label">Beamed</div>
-        <div class="stat-dot-row">
-          <div class="stat-dot green"></div>
-          <span class="stat-value" id="statDone">0</span>
-        </div>
-      </div>
-      <div class="stat-card panel">
-        <div class="stat-label">Data</div>
-        <div class="stat-dot-row">
-          <div class="stat-dot yellow"></div>
-          <span class="stat-value" id="statSize">0 B</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="queue-wrapper hidden" id="queueWrapper">
-      <div class="queue-header">— Transmission Log —</div>
-      <div id="fileList"></div>
-    </div>
-
+    <button class="folder-change-btn" onclick="openFolderModal()">Reroute</button>
   </div>
 
-  <div id="tabAchievements" class="tab-content hidden">
-    <div class="achievements-header">
-      <div class="ach-title-row">
-        <div class="ach-main-title">Mission Logs</div>
-        <div class="ach-progress-pill" id="achProgressPill">0 / 0 Unlocked</div>
+  <div class="dropzone-wrapper">
+    <label id="dropzone" class="disabled" for="fileInput"
+         ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
+      <div class="warp-ring"></div>
+      <div class="warp-ring"></div>
+      <div class="warp-ring"></div>
+      <div class="drop-corner-tr"></div>
+      <div class="drop-corner-bl"></div>
+      <div class="drop-inner-glow"></div>
+      <div class="drop-icon">🌌</div>
+      <div class="drop-title">Initiate Transmission</div>
+      <div class="drop-sub">
+        Drop files to beam them to your Drive<br/>
+        <span class="drop-browse">or tap to select from device</span>
       </div>
-      <div class="ach-progress-bar-wrap">
-        <div class="ach-progress-bar-fill" id="achProgressBar" style="width:0%"></div>
+    </label>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card panel">
+      <div class="stat-label">Queued</div>
+      <div class="stat-dot-row">
+        <div class="stat-dot red"></div>
+        <span class="stat-value" id="statQueued">0</span>
       </div>
     </div>
-    <div class="ach-category-label">Upload Milestones</div>
-    <div class="ach-grid" id="achGridMilestones"></div>
-    <div class="ach-category-label">Data Volume</div>
-    <div class="ach-grid" id="achGridData"></div>
-    <div class="ach-category-label">Fun & Quirky</div>
-    <div class="ach-grid" id="achGridFun"></div>
+    <div class="stat-card panel">
+      <div class="stat-label">Beamed</div>
+      <div class="stat-dot-row">
+        <div class="stat-dot green"></div>
+        <span class="stat-value" id="statDone">0</span>
+      </div>
+    </div>
+    <div class="stat-card panel">
+      <div class="stat-label">Data</div>
+      <div class="stat-dot-row">
+        <div class="stat-dot yellow"></div>
+        <span class="stat-value" id="statSize">0 B</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="queue-wrapper hidden" id="queueWrapper">
+    <div class="queue-header">— Transmission Log —</div>
+    <div id="fileList"></div>
   </div>
 
 </div>
@@ -145,24 +115,6 @@
       <div class="folder-list-placeholder">Scanning Drive…</div>
     </div>
     <button class="modal-cancel" onclick="closeFolderModal()">Abort</button>
-  </div>
-</div>
-
-<div class="achievement-unlock-overlay" id="achievementOverlay">
-  <div class="achievement-unlock-box">
-    <div class="aub-stars">
-      <div class="aub-star s1">✦</div>
-      <div class="aub-star s2">✦</div>
-      <div class="aub-star s3">✦</div>
-      <div class="aub-star s4">✦</div>
-      <div class="aub-star s5">✦</div>
-    </div>
-    <div class="aub-label">Achievement Unlocked</div>
-    <div class="aub-icon" id="aubIcon">🛸</div>
-    <div class="aub-name" id="aubName">First Contact</div>
-    <div class="aub-desc" id="aubDesc">Upload your first file</div>
-    <div class="aub-glow"></div>
-    <button class="aub-close" onclick="closeAchievementOverlay()">Continue Mission</button>
   </div>
 </div>
 
@@ -185,4 +137,3 @@
 <script src="app.js"></script>
 </body>
 </html>
-
